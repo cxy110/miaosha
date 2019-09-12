@@ -55,6 +55,10 @@
                         connectionURL="jdbc:mysql://127.0.0.1:3306/miaosha?serverTimezone=GMT%2B8&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="root">
+            <!--解决mybatis generator无法识别主键问题-->
+            <property name="useInformationSchema" value="true"/>
+            <!--设置可以获取remarks信息-->
+            <property name="remarks" value="true"/>
         </jdbcConnection>
         <!--java类型解析器,用于根据数据库列信息计算java类型,-->
         <javaTypeResolver>
@@ -88,8 +92,8 @@
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
         </table>
         <table tableName="user_password" domainObjectName="UserPassword" enableSelectByExample="false"
-        enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
-        selectByExampleQueryId="false">
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false">
         </table>
     </context>
 </generatorConfiguration>
