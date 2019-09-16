@@ -50,4 +50,5 @@ public interface UserPasswordMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(UserPassword record);
+    UserPassword selectPasswordByUserID(Integer userID);
 }
