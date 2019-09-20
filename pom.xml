@@ -39,10 +39,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
         <!--智能校验数据合法-->
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <groupId>6.0.16.Final</groupId>
+            <version>6.0.16.Final</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
