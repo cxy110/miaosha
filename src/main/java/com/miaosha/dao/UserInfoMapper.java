@@ -50,4 +50,5 @@ public interface UserInfoMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(UserInfo record);
+    UserInfo selectByTelphone(String telphone);
 }

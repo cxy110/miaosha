@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <style type="text/css">
+        .title{font-size: 10px; color: red;text-align: center}
+    </style>
+
+</head>
+<body>
+<div>
+    <h3 class="title">用户注册</h3>
+</div>
+<div class="data fo">
+<div>
+    用户昵称:<input type="text" name="username"id="name"><br>
+    手机号:<input type="text" name="phone" id="telphone"><br>
+    性别:<label><input type="radio" name="denger" value="1" checked="checked">男</label>
+    <label><input type="radio" name="denger" value="0" >女</label><br>
+    手机验证码:<input type="text" name="tpoCode" id="code"><br>
+    年&nbsp龄:<input type="number" name="age" id="age"><br>
+    <div class="password">
+        <ul class=""form-area>
+            <li>
+                <div class="pwd-input">
+        <input type="password" name="ps" class="passwordID" id="pwd" placeholder="请输入密码" maxlength="12">
+                </div>
+            </li>
+            <li>
+                <span style="position: absolute;right: 540px;top: 160px">
+                <img src="image/display.png" width="40px" height="40px" id="eyeShow" onclick="hidepwd()">
+                    </span>
+            </li>
+        </ul>
+    </div>
+    <input type="submit" value="注册"id="sub">
+    <input type="reset" value="重置">
+    <input type="button"value="登录" id="login">
+</div>
+</div>
+
+<script type="text/javascript">
+    var demoImg=document.getElementById("eyeShow");
+    var demoInput=document.getElementById("pwd");
+    function hidepwd(){
+
+        if(demoInput.type=="password"){
+            demoInput.type="text";
+            demoImg.src="image/show.png";
+        }else {
+            demoInput.type="password";
+            demoImg.src="image/display.png";
+
+        }
+
+    };
+
+
+</script>
+</body>
+<script>
+    jQuery(document).ready(function () {
+        $("#sub").on("click",function () {
+            var telphone=$("#telphone").val();
+            var name=$("#name").val();
+            var age=$("#age").val();
+            var code=$("#code").val();
+            var password=$("#pwd").val();
+            if(telphone==null||telphone==""){
+                alert("手机号不能为空");
+                return false;
+            };
+            if(name==null||name==""){
+                alert("姓名不能为空");
+                return false;
+            };
+            if(age==null||age==""){
+                alert("年纪不能为空");
+                return false;
+            };
+            if(code==null||code==""){
+                alert("验证码不能为空");
+                return false;
+            };
+            if(password==null||password=="") {
+                alert("密码不能为空");
+                return false;
+            }
+            $.ajax({
+                type:"POST",
+                contenType: "application/x-www-form-urlencoded",
+                url:"http://localhost:8080/user/register",
+                data:{
+                    "username":name,
+                    "phone":telphone,
+                    "denger":$('input[type=radio][name=denger]:checked').val(),
+                    "tpoCode":code,
+                    "age":age,
+                    "password":password
+                },
+                success:function (data) {
+                    if(data.code==2000){
+                        alert("注册成功");
+                        window.location.href="/login.html";
+                    }else {
+                        alert(data.data.errorMsg)
+                        window.location.href="/register.html"
+                    }
+                },
+                error:function (data) {
+                    alert("注册失败,原因是" + data.responseText);
+
+                    window.location.href="/register.html";
+                }
+            });
+        });
+      $("#login").on("click",function () {
+          window.location.href="login.html"
+      })
+    });
+</script>
+</html>

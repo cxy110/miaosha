@@ -1,5 +1,12 @@
 package com.miaosha.bo;
 
+import com.miaosha.validator.ValidationResult;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * @program: miaosha
  * @description: 用户领域模型
@@ -8,12 +15,19 @@ package com.miaosha.bo;
  */
 public class UserBO {
   private Integer id;
+  @NotBlank(message = "用户名不能为空")
   private String name;
+  @NotNull(message = "性别必须选择")
   private Integer gender;
+  @NotNull(message = "年龄必须填写")
+  @Min(value = 0,message = "年龄必须大于0")
+  @Max(value = 150,message = "年龄不能超过150岁")
   private Integer age;
+  @NotBlank(message = "手机号必须填写")
   private String phone;
   private String registerMode;
   private String thirdPartyId;
+  @NotBlank(message = "密码必须存在")
   private String encrptPassword;
 
   public String getEncrptPassword() {

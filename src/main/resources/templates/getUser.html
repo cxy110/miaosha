@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 </head>
 <body>
 <form action="/user/get" method="get">
     参数:用户id<input type="number" name="用户id">
 <input type="submit" value="查看">
 </form>
+<div>
+    <button type="button" id="getTOP" >获取top验证码</button>
+</div>
+
 </body>
+<script>
+    function f(){
+         window.location.href='getotp.html';
+    };
+    jQuery(document).ready(function () {
+        $("#getTOP").click(function () {
+           window.location.href='/getotp.html';
+        })
+    });
+</script>
 </html>
