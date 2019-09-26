@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <title>下单</title>
+    <script type="text/javascript">
+        var datas={};
+
+        jQuery(document).ready(function () {
+            datas=JSON.parse(localStorage.getItem("items"));
+          console.log(datas)
+            reload(datas);
+
+            $("#creatorder").click(function () {
+                var sales=$("#amount").val();
+                if(sales==null||sales==""){
+                    alert("请输入购买数量");
+                }if(sales>datas.stock){
+                    alert("购买数量不能大于库存");
+                }
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/order/creatOrder",
+                    data:{
+                        "itemId":datas.id,
+                        "amount":sales
+                    },
+                    success:function (data) {
+                        if(data.code=="2000"){
+                            alert("下单成功");
+                            window.location.href="/itemDetail.html?id="+data.data.itemId;
+                        }else if(data.code=="20002"){
+
+                            alert("下单失败,你认为:"+data.describe);
+                            window.location.href="login.html";
+                        }
+                    },
+                    error:function (data) {
+                        alert("下单失败了哦,大爷:"+data.responseText);
+                    }
+                })
+
+            })
+
+
+            });
+        function reload(datas) {
+            $("#title").text(datas.title);
+            $("#price").text(datas.price);
+            $("#stock").text(datas.stock);
+        };
+    </script>
+</head>
+<body>
+<h1 style="background-color: red;text-align: center">商品下单</h1>
+<div>
+    <div class="form-group">
+        <label class="control-laber">商品名称</label>
+        <div>
+            <label class="control-label" id="title"/>
+        </div>
+    </div><div class="form-group">
+    <label class="control-laber">价格</label>
+    <div>
+        <label class="control-label" id="price"/>
+    </div>
+</div><div class="form-group">
+    <label class="control-laber">库存</label>
+    <div>
+        <label class="control-label" id="stock"/>
+    </div>
+</div>
+    <div class="amount-class">
+<label>
+    购买数量:<input id="amount" type="text">
+</label>
+    </div>
+    <button type="submit" id="creatorder">下单</button>
+</div>
+</body>
+</html>

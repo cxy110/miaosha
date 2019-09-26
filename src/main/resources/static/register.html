@@ -90,6 +90,7 @@
             }
             $.ajax({
                 type:"POST",
+                //表单传递,后端通过@RequesyParam接收
                 contenType: "application/x-www-form-urlencoded",
                 url:"http://localhost:8080/user/register",
                 data:{
@@ -102,11 +103,13 @@
                 },
                 success:function (data) {
                     if(data.code==2000){
+                        //controller层返回的结果,return的
                         alert("注册成功");
                         window.location.href="/login.html";
                     }else {
+                        //抛出异常,被捕获处理的结果,也算作成功,因为不会给用户显示报错的
                         alert(data.data.errorMsg)
-                        window.location.href="/register.html"
+                        window.location.reload();
                     }
                 },
                 error:function (data) {

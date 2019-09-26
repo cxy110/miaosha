@@ -24,7 +24,8 @@ public class GlobalExceptionHandler {
       BusinessException businessException=(BusinessException) e;
 
       jsonObject.put("code",businessException.getErrorCode());
-      jsonObject.put("reason",businessException.getDescribe());
+      jsonObject.put("message",businessException);
+      jsonObject.put("describe",businessException.getDescribe());
 
     }
     return jsonObject;

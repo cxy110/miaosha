@@ -33,9 +33,9 @@
                         "password":password
                     },
                     success:function (data) {
-                        if(data.code=="2000"){
-
-                             window.location.href="index.html";
+                        if(data.code=="20010"){
+                            alert("登录成功");
+                             window.location.href="itemList.html";
                         }else {
                             alert("登录失败原因是:"+data.data.errorMsg);
                             window.location.href="login.html";
@@ -43,7 +43,7 @@
                     },
                     error:function (data) {
                     alert("登录失败:"+data.responseText);
-                    window.location.href="login.html";
+                    window.location.reload();
                     }
                 });
             });

@@ -19,6 +19,14 @@ public class JsonResult {
     return jsonObject;
 
   }
+  public static JSONObject getResult(Object data, Message msg){
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("data",data);
+    jsonObject.put("message",msg);
+    jsonObject.put("code",msg.getCode());
+    return jsonObject;
+
+  }
   public static JSONObject getResult( Message msg, String Describe){
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("describe",Describe+msg.getDefaultDescribe());

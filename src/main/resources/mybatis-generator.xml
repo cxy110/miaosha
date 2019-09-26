@@ -95,5 +95,21 @@
                enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false">
         </table>
+        <table tableName="item" domainObjectName="Item" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="item_stock" domainObjectName="ItemStock" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="order" domainObjectName="Order" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="sequence_info" domainObjectName="Sequence" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
     </context>
 </generatorConfiguration>

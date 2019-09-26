@@ -51,7 +51,7 @@ public class UserController {
     this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
     this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userBO);
 
-    return JsonResult.getResult(Message.SUCCESS,"用户登录");
+    return JsonResult.getResult(Message.LOGININ_SUCCESS);
   }
 
   @RequestMapping(value = "/getOTP",method = RequestMethod.POST,consumes="application/x-www-form-urlencoded")
@@ -69,7 +69,7 @@ public class UserController {
     return JsonResult.getResult(s, Message.SUCCESS,"获取otp验证码");
   }
   @GetMapping("/get")
-  public JSONObject getUser(@RequestParam(value = "userID",required = false,defaultValue = "1") Integer userID)throws BusinessException{
+  public JSONObject getUser(@RequestParam(name = "userID") Integer userID)throws BusinessException{
     Message success = Message.SUCCESS;
     UserBO userBO = userService.selectByPrimaryKey(userID);
     if(userBO==null){
