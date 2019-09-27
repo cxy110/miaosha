@@ -31,6 +31,16 @@ public class ItemBo {
   //商品描述图片的url
   @NotNull(message = "商品图片信息必须有")
   private  String imgUrl;
+  //如果promo不为null,则表明该商品有秒杀活动
+  private PromoBo promoBo;
+
+  public PromoBo getPromoBo() {
+    return promoBo;
+  }
+
+  public void setPromoBo(PromoBo promoBo) {
+    this.promoBo = promoBo;
+  }
 
   public Integer getId() {
     return id;

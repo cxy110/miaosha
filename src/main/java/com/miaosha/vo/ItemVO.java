@@ -1,9 +1,12 @@
 package com.miaosha.vo;
 
+import org.joda.time.DateTime;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 
 /**
  * @program: miaosha
@@ -25,6 +28,46 @@ public class ItemVO {
   private  Integer sales;
   //商品描述图片的url
   private  String imgUrl;
+  //商品秒杀状态,0表示没有秒杀,1表示未开始,2表示进行中
+  private Integer status;
+  //秒杀时的商品价格
+  private BigDecimal promoPrice;
+  //秒杀时的商品在秒杀表里的id
+  private Integer promoId;
+      //秒杀的开始时间
+  private String startDate;
+
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
+  }
+
+  public BigDecimal getPromoPrice() {
+    return promoPrice;
+  }
+
+  public void setPromoPrice(BigDecimal promoPrice) {
+    this.promoPrice = promoPrice;
+  }
+
+  public Integer getPromoId() {
+    return promoId;
+  }
+
+  public void setPromoId(Integer promoId) {
+    this.promoId = promoId;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
 
   public Integer getId() {
     return id;

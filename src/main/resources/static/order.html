@@ -24,7 +24,8 @@
                     url:"http://localhost:8080/order/creatOrder",
                     data:{
                         "itemId":datas.id,
-                        "amount":sales
+                        "amount":sales,
+                        "promoId":datas.promoId
                     },
                     success:function (data) {
                         if(data.code=="2000"){

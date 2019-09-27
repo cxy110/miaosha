@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +33,14 @@ public class OrderController {
   @Autowired
   private HttpServletRequest httpServletRequest;
   @PostMapping("/creatOrder")
-  public JSONObject creatOrder(Integer itemId,Integer amount) throws BusinessException {
+  public JSONObject creatOrder(Integer itemId,Integer amount,@RequestParam(name="promoId",required = false) Integer promoId) throws BusinessException {
     Boolean islogin =(Boolean) httpServletRequest.getSession().getAttribute("IS_LOGIN");
     if(islogin==null||!islogin.booleanValue()) {
       throw new BusinessException(Message.USER_LOGIN_ERROE, "请先登录,再下单");
     }
       UserBO userBO =(UserBO) httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
-    OrderBO orderBO = orderService.creatOrder(userBO.getId(), itemId, amount);
+    OrderBO orderBO = orderService.creatOrder(userBO.getId(), itemId, amount,promoId);
     OrderVO orderVO = new OrderVO();
     BeanUtils.copyProperties(orderBO,orderVO);
     return JsonResult.getResult(orderVO, Message.SUCCESS);

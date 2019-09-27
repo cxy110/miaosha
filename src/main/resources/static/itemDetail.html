@@ -28,6 +28,7 @@
                     if(data.code=="2000") {
                         itemdata = data.data;
                         reloadDom();
+                        setInterval(reloadDom,1000)
                     }else {
                         alert("详情查询失败,原因是:"+data.describe);
                     }
@@ -52,6 +53,30 @@
             $("#imgUrl").attr("src",itemdata.imgUrl);
             $("#stock").text(itemdata.stock);
             $("#sales").text(itemdata.sales);
+            if(itemdata.status==0){
+                //没有秒杀活动
+              $("#promoPriceContainer").hide();
+            } else if(itemdata.status==1){
+                //秒杀活动还未开始
+                var startTime=itemdata.startDate.replace(new RegExp("-","gm"),"/");
+                startTime=(new Date(startTime)).getTime();
+                var nowTime=Date.parse(new Date());
+                var delda=(startTime-nowTime)/1000;
+                if (delda<=0){
+                    //活动开始了
+                    itemdata.promoStatus=2;
+                    reloadDom();
+                }
+                $("#prompStartDate").text("秒杀活动将于:"+itemdata.startDate+"开始售卖,倒计时:"+delda+"秒");
+                $("#promoPrice").text(itemdata.promoPrice);
+                $("#creatOrder").attr("disabled",true);
+            }else if(itemdata.status==2){
+                //秒杀活动正在进行中
+                $("#prompStartDate").text("秒杀活动正在进行中");
+                $("#promoPrice").text(itemdata.promoPrice);
+                $("#creatOrder").attr("disabled",false);
+                $("#normalPrice").hide();
+            }
         }
 
     </script>
@@ -59,6 +84,12 @@
 <body>
 <h1 style="align-content: center;color: #b21f2d;background: #1c7430">商品详情</h1>
 <div>
+    <div class="form-group">
+        <label style="color: blue;" id="prompStatus" class="control-laber"></label>
+        <div>
+            <label style="color: red;"class="control-label" id="prompStartDate"/>
+        </div>
+    </div>
     <div class="form-group">
         <label class="control-laber">商品名称</label>
         <div>
@@ -71,10 +102,16 @@
             <label class="control-label" id="description"/>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" id="normalPrice">
         <label class="control-laber">价格</label>
         <div>
             <label class="control-label" id="price"/>
+        </div>
+    </div>
+    <div class="form-group" id="promoPriceContainer">
+        <label style="color: red" class="control-laber">秒杀价格</label>
+        <div>
+            <label style="color:red;" class="control-label" id="promoPrice"/>
         </div>
     </div>
     <div class="form-group">

@@ -1,5 +1,6 @@
 package com.miaosha.bo;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 
 /**
@@ -21,6 +22,16 @@ public class OrderBO {
   private Integer amount;
   //商品购买的总价
   private BigDecimal orderAmount;
+  //秒杀活动id
+  private Integer promoId;
+
+  public Integer getPromoId() {
+    return promoId;
+  }
+
+  public void setPromoId(Integer promoId) {
+    this.promoId = promoId;
+  }
 
   public String getId() {
     return id;

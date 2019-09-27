@@ -38,6 +38,8 @@ public class Orders {
      * @mbg.generated
      */
     private BigDecimal orderPrice;
+    //秒杀活动id
+    private  Integer promoId;
 
     /**
      *
@@ -91,6 +93,14 @@ public class Orders {
      */
     public Integer getUserId() {
         return userId;
+    }
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
     }
 
     /**

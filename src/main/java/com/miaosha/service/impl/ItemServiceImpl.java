@@ -1,6 +1,7 @@
 package com.miaosha.service.impl;
 
 import com.miaosha.bo.ItemBo;
+import com.miaosha.bo.PromoBo;
 import com.miaosha.dao.ItemMapper;
 import com.miaosha.dao.ItemStockMapper;
 import com.miaosha.entity.Item;
@@ -8,6 +9,7 @@ import com.miaosha.entity.ItemStock;
 import com.miaosha.result.BusinessException;
 import com.miaosha.result.Message;
 import com.miaosha.service.ItemService;
+import com.miaosha.service.PromoService;
 import com.miaosha.validator.ValidateImpl;
 import com.miaosha.validator.ValidationResult;
 import org.springframework.beans.BeanUtils;
@@ -34,6 +36,8 @@ public class ItemServiceImpl implements ItemService {
   private ItemStockMapper itemStockMapper;
   @Autowired
   private ValidateImpl validateimpl;
+  @Autowired
+  private PromoService promoService;
   //创建添加商品
   @Override
   @Transactional
@@ -116,6 +120,11 @@ public class ItemServiceImpl implements ItemService {
     ItemBo itemBo = new ItemBo();
     BeanUtils.copyProperties(item,itemBo);
     itemBo.setStock(itemStock.getStock());
+    //获取商品的秒杀相关的信息
+    PromoBo promoBo = promoService.selectByItemId(itemBo.getId());
+    if(promoBo!=null&&promoBo.getStatus().intValue()!=3){
+      itemBo.setPromoBo(promoBo);
+    }
     return itemBo;
   }
 }

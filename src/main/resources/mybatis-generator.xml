@@ -84,7 +84,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.miaosha.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <!--生成对应表及类名-->
+      <!--生成对应表及类名-->
         <table tableName="user_info" domainObjectName="UserInfo" enableSelectByExample="false"
         enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
         selectByExampleQueryId="false">
@@ -108,6 +108,10 @@
                selectByExampleQueryId="false">
         </table>
         <table tableName="sequence_info" domainObjectName="Sequence" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="promo" domainObjectName="Promo" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false">
         </table>

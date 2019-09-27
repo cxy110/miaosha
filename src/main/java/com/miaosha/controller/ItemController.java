@@ -7,6 +7,8 @@ import com.miaosha.result.JsonResult;
 import com.miaosha.result.Message;
 import com.miaosha.service.ItemService;
 import com.miaosha.vo.ItemVO;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.lang.model.element.Name;
 import javax.swing.*;
+import java.text.DateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +60,14 @@ public class ItemController {
     ItemBo itemInfomation = itemService.getItemInfomation(id);
     ItemVO itemVO = new ItemVO();
     BeanUtils.copyProperties(itemInfomation,itemVO);
+    if(itemInfomation.getPromoBo()!=null){
+      itemVO.setPromoId(itemInfomation.getPromoBo().getId());
+      itemVO.setPromoPrice(itemInfomation.getPromoBo().getPromoItemPrice());
+      itemVO.setStartDate(itemInfomation.getPromoBo().getStartDate().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+      itemVO.setStatus(itemInfomation.getPromoBo().getStatus());
+    }else {
+      itemVO.setStatus(0);
+    }
     return JsonResult.getResult(itemVO,Message.SUCCESS);
   }
 }
